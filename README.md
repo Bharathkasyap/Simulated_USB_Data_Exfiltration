@@ -39,7 +39,7 @@ Before diving into the simulated insider threat scenario, it's important to unde
 
 
 ## ✅ Insider Threat Scenario: USB Data Exfiltration by Contractor
-<details> <summary><strong>Click to expand and view incident overview and outcome</strong></summary>
+
 ### 🧠 Scenario Summary:
 A short-term contractor (employee-1257) attempted to exfiltrate confidential data such as HR records and financial documents by copying them to a USB drive. Due to student-level access limitations, no real-time DLP prevention tools like Microsoft Purview were available. However, the attempt was successfully detected through custom KQL rules in Azure Sentinel, showcasing a strong understanding of detection methodologies and proactive security monitoring.
 
@@ -114,7 +114,6 @@ Even in the absence of Purview DLP, this incident proved that Sentinel-based det
 ###🎯 Key Message:
 Even without direct access to Microsoft Purview DLP, this scenario proves my strong grasp of DLP principles, incident detection strategy, and SOC response workflows. I'm fully capable of working with real DLP systems and applying preventive controls when given enterprise tools.
 
-</details>
 
 
 
@@ -130,6 +129,7 @@ Even without direct access to Microsoft Purview DLP, this scenario proves my str
 
 
 
+<details> <summary><strong>Click to expand and view incident overview and outcome</strong></summary>
 
 # 🔐 Simulated USB Data Exfiltration using Sysmon + Sentinel
 
@@ -415,3 +415,6 @@ A short-term contractor attempted to exfiltrate sensitive internal documents usi
 - The host machine was **isolated from the network** immediately using Defender isolation commands.
 - SOC team blocked
 
+
+
+</details>
