@@ -318,6 +318,11 @@ Simulate the creation and enforcement of a Microsoft Purview Data Loss Preventio
 
 * Target data in **Windows 10/11 endpoints**
 
+<div align="center">
+<img src =src/DLP_Policy.png width="300">
+</div>
+ </br>
+
 #### Step 4: Define Conditions:
 
 * **Content contains:**
@@ -347,6 +352,11 @@ Simulate the creation and enforcement of a Microsoft Purview Data Loss Preventio
 ---
 
 ### 🔔 Simulated DLP Alert Notification
+
+<div align="center">
+<img src =src/DLP_Notif.png width="300">
+</div>
+ </br>
 
 > **Alert Title:** "Blocked file transfer containing SSNs to USB"
 >
@@ -396,6 +406,8 @@ Use this as a dedicated `.md` file section or GitHub subfolder for the "DLP Poli
 
 
 </details>
+
+---
 
 
 
