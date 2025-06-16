@@ -56,7 +56,12 @@ A custom detection rule in Microsoft Sentinel analyzes events from Microsoft Def
 
 **[For Simulation Steps](src/simulation.md)**
 
-<details> <summary><strong>Click here expand Threat_Hunting Strategy</strong></summary>
+### 🧪 Analyst Investigation:
+Investigated the Sentinel alert using Advanced Hunting queries against DeviceFileEvents
+
+$${{\color{Orange}\normalsize{\textsf{
+
+<details> <summary><strong>Click here expand Existing Detection Rule in place and Threat_Hunting Strategy</strong></summary>
 
 ## 🔍 Existing Detection Rule: Sentinel KQL-Based USB File Copy Alert
 ### 🎯 Purpose:
@@ -225,8 +230,9 @@ Check if sensitive file content was renamed with misleading names.
 
 </details>
 
-### 🧪 Analyst Investigation:
-Investigated the Sentinel alert using Advanced Hunting queries against DeviceFileEvents
+}}}}$$
+
+
 
 ### Confirmed:
 
