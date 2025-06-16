@@ -54,7 +54,7 @@ A custom detection rule in Microsoft Sentinel analyzes events from Microsoft Def
 
 **Actor:** Known temp account with elevated file access
 
-**[For simulation Steps](src/simulation.md)**
+**[For Simulation Steps](src/simulation.md)**
 
 ### 🧪 Analyst Investigation:
 Investigated the Sentinel alert using Advanced Hunting queries against DeviceFileEvents
