@@ -288,6 +288,116 @@ Even in the absence of Purview DLP, this incident proved that Sentinel-based det
 ### 🎯 Key Message:
 Even without direct access to Microsoft Purview DLP, this scenario proves my strong grasp of DLP principles, incident detection strategy, and SOC response workflows. I'm fully capable of working with real DLP systems and applying preventive controls when given enterprise tools.
 
+### Let's simulate the setup of the DLP tool Purview 
+
+<details> <summary><strong>Click here expand</strong></summary>
+
+
+### ✅ Microsoft Purview DLP Policy Simulation
+
+### 🎯 Goal
+
+Simulate the creation and enforcement of a Microsoft Purview Data Loss Prevention (DLP) policy to block unauthorized USB-based exfiltration of sensitive data (e.g., SSNs, credit card info, HR documents).
+
+---
+
+### 🛠️ Step-by-Step: Creating a DLP Policy
+
+#### Step 1: Navigate to Microsoft Purview Compliance Portal
+
+* Go to: [https://compliance.microsoft.com](https://compliance.microsoft.com)
+* Sign in with admin credentials
+* Navigate to **Data loss prevention** > **Policy**
+
+#### Step 2: Click on **Create Policy**
+
+* Name: `USB_ConfidentialData_Block_Policy`
+* Description: Blocks transfer of confidential data to USB devices for all except approved users
+
+#### Step 3: Select **Custom Policy** > **Devices** as location
+
+* Target data in **Windows 10/11 endpoints**
+
+#### Step 4: Define Conditions:
+
+* **Content contains:**
+
+  * U.S. Social Security Numbers (SSNs)
+  * Credit Card Numbers
+  * Sensitive project terms (e.g., "Internal Use Only")
+
+#### Step 5: Define Actions:
+
+* Block the activity (file copy to USB)
+* Audit the event
+* Notify user with a policy tip
+* Alert security operations team
+
+#### Step 6: Assign Policy Scope:
+
+* Apply to:
+
+  * All users except `Security_Admins`, `Approved_Contractors`
+
+#### Step 7: Review & Publish
+
+* Enable policy immediately
+* Confirm enforcement across devices with MDE onboarded
+
+---
+
+### 🔔 Simulated DLP Alert Notification
+
+> **Alert Title:** "Blocked file transfer containing SSNs to USB"
+>
+> **User:** `contractor_user01`
+>
+> **Device:** `HR-Laptop-018`
+>
+> **Action Taken:** Blocked
+>
+> **Policy:** `USB_ConfidentialData_Block_Policy`
+>
+> **Time:** `2025-06-17 11:05:12`
+>
+> **Sensitive Info Detected:** U.S. SSN, Keyword Match: "Internal Use Only"
+
+---
+
+### 📄 Dummy Log Sample
+
+| Timestamp           | Username           | DeviceName    | FileName                  | FileType | ActionTaken | PolicyName                           | SensitiveType      |
+| ------------------- | ------------------ | ------------- | ------------------------- | -------- | ----------- | ------------------------------------ | ------------------ |
+| 2025-06-17 11:05:12 | contractor\_user01 | HR-Laptop-018 | C:\HR\employee\_ssn.docx  | .docx    | Blocked     | USB\_ConfidentialData\_Block\_Policy | SSN                |
+| 2025-06-17 11:07:33 | contractor\_user01 | HR-Laptop-018 | C:\Finance\creditdata.pdf | .pdf     | Blocked     | USB\_ConfidentialData\_Block\_Policy | Credit Card Number |
+
+---
+
+### ✅ Outcome of Enforcement
+
+* File copy operation is **blocked before** the file is written to the USB drive
+* **No manual SOC analyst intervention needed**
+* **Email alert + Sentinel integration** logs the violation
+* DLP enforces real-time data protection aligned with compliance
+
+---
+
+### 📘 Summary
+
+This simulation demonstrates:
+
+* How to create DLP rules in Microsoft Purview
+* What kind of sensitive content gets blocked
+* Sample logs and alert behavior
+* Strong defense to proactively stop insider data exfiltration
+
+Use this as a dedicated `.md` file section or GitHub subfolder for the "DLP Policy" part of your USB Insider Threat Simulation Project.
+
+
+
+</details>
+
+
 
 
 
