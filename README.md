@@ -110,6 +110,8 @@ DeviceFileEvents
 | where FileName has_any ("SSN", "credit", "HR", "finance", "Confidential")
 | project Timestamp, DeviceName, InitiatingProcessAccountName, FileName, FolderPath, ActionType
 ```
+---
+
 
 ### 📌 Explanation:
 
@@ -133,6 +135,8 @@ DeviceFileEvents
 - FileType: .pdf
 - Target: D:\Staging\Employee_SSN_Report.pdf
 
+---
+
 ## 🧪 Sample Log Output
 
 | Timestamp              | DeviceName     | User             | FileName              | FolderPath           | ActionType  |
@@ -155,6 +159,8 @@ This Sentinel detection rule ran every 5 minutes and matched the above KQL condi
 - Account: contractor_user01
 - Device: WIN10-VM01
 - File: Q2_Report.pdf
+
+---
 
 ### Alert Workflow (automated):
 
@@ -229,6 +235,7 @@ Check if sensitive file content was renamed with misleading names.
 | where FileName has_any("payment_details", "image", "backup", "info")
 ```
 
+---
 
 ### 📌 Additional Techniques
 
@@ -236,11 +243,15 @@ Check if sensitive file content was renamed with misleading names.
 - Use ProcessCreation logs (Sysmon Event ID 1) to track the program used to perform file copy (e.g., Explorer.exe, cmd.exe).
 - Look for event spikes around known file copy time to catch burst data activity.
 
+---
+
 ### 📤 Output & Hunting Dashboard
 
 - Save query as a Hunting Rule in Sentinel
 - Set frequency: Every 1 hour
 - Output: Alert if ≥ 2 files match pattern from contractor within 10 minutes
+
+---
 
 ### 👁️‍🗨️ Initial Analyst Response (Tier 1/Tier 2)
 
@@ -270,6 +281,8 @@ Check if sensitive file content was renamed with misleading names.
 - **Step 4**: IOC (filename hash/path) sent to Defender or TI team.
 - **Step 5**: Final review & documentation stored in case manager.
 
+---
+
 
 ### 🪡 MITRE ATT\&CK Mapping
 
@@ -281,6 +294,7 @@ Check if sensitive file content was renamed with misleading names.
 | **TA0002** | [T1074.001 - Local Data Staging](https://attack.mitre.org/techniques/T1074/001/)                | Sensitive files staged in `D:\Staging` before copy |
 
 
+---
 
 ### 🏋️️ SOC Analyst Role Mapping (Daily Operations)
 
@@ -291,6 +305,7 @@ Check if sensitive file content was renamed with misleading names.
 | **Investigation**     | Correlated filename, user, and directory              |
 | **Response Workflow** | Documented in `/Playbooks/usb_response_playbook.md`   |
 
+---
 
 ### 🔒 Prevention Governance Policies (Documented)
 
@@ -323,12 +338,12 @@ This project replicates an **enterprise-level insider threat** simulation with:
 * Alert triage and escalation steps
 * Playbooks, screenshots, and documentation
 
-> Reviewers see this not as a lab, but as a **practical SOC use case** aligned with actual job expectations for roles like **Insider Threat Analyst** at many organizations.
+---
 
 
 ## 📘 README Tips
 
-> “This project showcases how sensitive file actions can be monitored and flagged using Microsoft Defender for Endpoint + Sysmon + Sentinel. Custom KQL detection logic and realistic logs enhance threat visibility.”
+> “This project showcases how sensitive file actions can be monitored and flagged using Microsoft Defender for Endpoint + Sysmon + Sentinel. Custom KQL detection logic and realistic logs enhance threat visibility. Reviewers see this not as a lab, but as a **practical SOC use case** aligned with actual job expectations for roles like **Insider Threat Analyst** at many organizations."
 
 
 
