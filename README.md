@@ -38,6 +38,96 @@ Before diving into the simulated insider threat scenario, it's important to unde
 
 
 
+## ✅ Insider Threat Scenario: USB Data Exfiltration by Contractor
+<details> <summary><strong>Click to expand and view incident overview and outcome</strong></summary>
+### 🧠 Scenario Summary:
+A short-term contractor (employee-1257) attempted to exfiltrate confidential data such as HR records and financial documents by copying them to a USB drive. Due to student-level access limitations, no real-time DLP prevention tools like Microsoft Purview were available. However, the attempt was successfully detected through custom KQL rules in Azure Sentinel, showcasing a strong understanding of detection methodologies and proactive security monitoring.
+
+### 🚨 Alert Trigger:
+Custom detection rule in Microsoft Sentinel analyzed events from Microsoft Defender for Endpoint.
+
+### Alert triggered on:
+
+- File copy events from sensitive directories (HR, Finance, Legal)
+- Use of removable media (e.g., D:\Staging)
+- Match with sensitive filename patterns (e.g., Employee_SSN.docx)
+
+**Actor:** Known temp account with elevated file access
+
+### 🧪 Analyst Investigation:
+Investigated the Sentinel alert using Advanced Hunting queries against DeviceFileEvents
+
+### Confirmed:
+
+-Files originated from sensitive directories
+-File extensions included .pdf, .docx, .xlsx
+-USB device used as destination
+-Access occurred outside normal business hours
+
+### ⚠️ Root Cause:
+- No Microsoft Purview DLP rules were available in this setup to prevent data transfer to USBs.
+- Detection was post-event, highlighting a gap in proactive controls.
+- Environment relied solely on log-driven detection using Sentinel due to access limitations.
+
+### 🧯 Containment Steps:
+- Endpoint isolated using Microsoft Defender for Endpoint's isolate device command
+- USB device ID added to blocklist in Endpoint Manager
+- Contractor account disabled; HR & legal teams notified
+- Playbook triggered for forensic collection and incident documentation
+
+### 🛠️ Improvement & Automation:
+### 🚫 Initial Setup:
+- No data-centric DLP tools available (like Microsoft Purview)
+- Only reactive detection using Azure Sentinel analytics rules
+
+### ✅ Strategic Enhancements Based on Learnings:
+### 🧠 Simulated Microsoft Purview DLP Understanding Applied:
+- Documented how a real DLP policy would’ve prevented this (USB block, content inspection)
+- Created DLP-style detection rule logic using KQL for educational value
+- Mapped use case to Microsoft Purview's functionality to show readiness for real-world DLP implementation
+
+### 📈 KQL Detection Rule Enhanced:
+- Filtered for DeviceFileEvents involving removable drives
+- Flagged file transfers with sensitive naming conventions
+- Escalated alerts automatically for accounts tagged as temporary or contractors
+
+### ⚙️ SOAR Integration via Sentinel:
+-Playbook triggered on detection
+-Sent email to SOC
+-Created ticket in ServiceNow
+-Isolated the host if USB transfer exceeded threshold
+
+### ✅ Final Outcome:
+Even in the absence of Purview DLP, this incident proved that Sentinel-based detection and SOC response can mitigate insider threats effectively. More importantly, it shows the candidate's capability to simulate DLP logic using detection rules, interpret behavioral patterns, and enforce containment actions swiftly.
+
+### Before:
+
+-No USB blocking or data classification
+-Delayed response due to post-incident detection only
+
+### After:
+
+- Simulated DLP logic implemented using custom KQL
+- Rapid alerting, containment, and root cause triage
+- Demonstrated readiness to transition into real-world DLP environments
+
+###🎯 Key Message:
+Even without direct access to Microsoft Purview DLP, this scenario proves my strong grasp of DLP principles, incident detection strategy, and SOC response workflows. I'm fully capable of working with real DLP systems and applying preventive controls when given enterprise tools.
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
