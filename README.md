@@ -59,7 +59,7 @@ A custom detection rule in Microsoft Sentinel analyzes events from Microsoft Def
 ### 🧪 Analyst Investigation:
 Investigated the Sentinel alert using Advanced Hunting queries against DeviceFileEvents
 
-$${{\color{Orange}\normalsize{\textsf{Existing Detection Rule in place and Threat_Hunting Strategy\}}}}$$
+$${{\color{Orange}\normalsize{\textsf{Existing Detection Rule in place and Threat_Hunting Strategy}}}}$$
 
 <details> <summary><strong>Click here expand</strong></summary>
 
