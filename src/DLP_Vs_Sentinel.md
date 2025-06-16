@@ -1,4 +1,4 @@
-# 📘 DLP vs. Azure Sentinel Detection Rules – Deep Dive for Recruiters and Reviewers
+# 📘 DLP vs. Azure Sentinel Detection Rules – Deep Dive for Reviewers
 
 > This document serves as a learning and demonstration guide to show my understanding of **Data Loss Prevention (DLP)** and **Azure Sentinel Detection Rules**, despite not having direct enterprise-level access to Microsoft Purview.
 
@@ -6,7 +6,7 @@
 
 ## 🧠 Introduction: Why This Document Matters
 
-Many entry-level candidates showcase only hands-on detection work with tools like **Azure Sentinel**, but **this file is meant to demonstrate that I understand both detection and prevention strategies.**
+Many showcase only hands-on detection work with tools like **Azure Sentinel**, but **this file is meant to demonstrate that I understand both detection and prevention strategies.**
 
 Even without direct Purview access, I have broken down:
 - The key differences between DLP and Sentinel analytics rules
