@@ -1,6 +1,6 @@
 ## 🧪 USB Data Exfiltration Simulation: Technical Procedure Documentation
 
-This markdown file documents each step we followed during the simulation of a USB-based data exfiltration attempt by a short-term contractor. The purpose is to simulate an insider threat scenario, capture behavioral logs using Sysmon, and detect the activity using Microsoft Sentinel.
+This file documents each step we followed during the simulation of a USB-based data exfiltration attempt by a short-term contractor. The purpose is to simulate an insider threat scenario, capture behavioral logs using Sysmon, and detect the activity using Microsoft Sentinel.
 
 ---
 
