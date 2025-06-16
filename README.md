@@ -68,6 +68,32 @@ ${{\color{Orange}\huge{\textsf{ExistingDetectionRuleInPlaceAndThreatHuntingStrat
 ### 🎯 Purpose:
 Detect any file copied to a removable USB drive from sensitive folders like HR, Finance, Confidential.
 
+---
+
+### 🏢 Scenario Summary
+
+A contractor on a short-term project accesses files labeled "Internal Use Only" and transfers them to a USB drive. The files contain sensitive financial or personal information.
+
+* Device: Windows 10 VM (Employee-1257)
+* File Types: `.docx`, `.pdf` containing SSNs, budget, payment info
+* Intent: Covert exfiltration for personal gain or sabotage
+
+---
+
+### 🏘️ Architecture & Tools Used
+
+| Component                             | Purpose                                                            |
+| ------------------------------------- | ------------------------------------------------------------------ |
+| Microsoft Defender for Endpoint (MDE) | Device-level monitoring of USB activity and file actions           |
+| Microsoft Sentinel                    | SIEM for correlation, alerting, and response                       |
+| Sysmon + Event Viewer                 | File creation and process activity detection                       |
+| KQL (Kusto Query Language)            | Custom detection logic for USB exfiltration                        |
+| Markdown (.md) Governance Docs        | Policy definition and simulation documentation                     |
+| GitHub                                | Public showcase with `/KQL`, `/Playbooks`, `/Logs`, `/Screenshots` |
+
+---
+
+
 ### 📄 Rule Location:
 Microsoft Sentinel
 
@@ -107,41 +133,78 @@ DeviceFileEvents
 - FileType: .pdf
 - Target: D:\Staging\Employee_SSN_Report.pdf
 
----
+## ✅ Incident Response Flow
 
-### 🔍 Objective
-
-This project simulates an **insider threat scenario** where a contractor attempts to exfiltrate sensitive files (e.g., SSNs, finance documents) via a USB drive. The goal is to:
-
-* Demonstrate **data loss prevention (DLP)** using Microsoft Defender for Endpoint
-* Detect unauthorized file access and copy activity using **Sysmon logs** and **KQL queries** in Microsoft Sentinel
-* Document governance policies and playbook workflows following **industry standards**
-* Align all steps with the **MITRE ATT\&CK framework**, the **United Airlines Insider Threat JD**, and **SOC triage procedures**
+- **Step 1**: Incident triaged by Tier 1 (USB detection + suspicious file)
+- **Step 2**: Tier 2 correlates against endpoint timeline and user identity.
+- **Step 3**: Device isolated or user session terminated (if configured).
+- **Step 4**: IOC (filename hash/path) sent to Defender or TI team.
+- **Step 5**: Final review & documentation stored in case manager.
 
 ---
 
-### 🏢 Scenario Summary
+## 🧪 Sample Log Output
 
-A contractor on a short-term project accesses files labeled "Internal Use Only" and transfers them to a USB drive. The files contain sensitive financial or personal information.
-
-* Device: Windows 10 VM (Employee-1257)
-* File Types: `.docx`, `.pdf` containing SSNs, budget, payment info
-* Intent: Covert exfiltration for personal gain or sabotage
-
----
-
-### 🏘️ Architecture & Tools Used
-
-| Component                             | Purpose                                                            |
-| ------------------------------------- | ------------------------------------------------------------------ |
-| Microsoft Defender for Endpoint (MDE) | Device-level monitoring of USB activity and file actions           |
-| Microsoft Sentinel                    | SIEM for correlation, alerting, and response                       |
-| Sysmon + Event Viewer                 | File creation and process activity detection                       |
-| KQL (Kusto Query Language)            | Custom detection logic for USB exfiltration                        |
-| Markdown (.md) Governance Docs        | Policy definition and simulation documentation                     |
-| GitHub                                | Public showcase with `/KQL`, `/Playbooks`, `/Logs`, `/Screenshots` |
+| Timestamp              | DeviceName     | User             | FileName              | FolderPath           | ActionType  |
+|------------------------|----------------|------------------|------------------------|-----------------------|-------------|
+| 2025-06-16 13:01:24    | employee-1257  | employee-1257    | finance_notes.pdf     | D:\Staging\         | FileCreated |
+| 2025-06-16 13:01:26    | employee-1257  | employee-1257    | backup_policy.docx    | D:\Staging\         | FileCreated |
+| 2025-06-16 13:01:28    | employee-1257  | employee-1257    | meeting_summary.pdf   | D:\Staging\         | FileCreated |
 
 ---
+
+## 📘 README Tips
+
+> “This project showcases how sensitive file actions can be monitored and flagged using Microsoft Defender for Endpoint + Sysmon + Sentinel. Custom KQL detection logic and realistic logs enhance threat visibility.”
+
+
+
+### 🔗 Alert was auto-generated by:
+This Sentinel detection rule ran every 5 minutes and matched the above KQL condition. The match occurred once the file Q2_Report.pdf was copied to the USB.
+
+
+### 🧠 How the Analyst Received the Alert
+
+- Microsoft Sentinel → Incidents pane
+- Alert was visible in the active incidents with severity "High".
+- Entities involved:
+- Account: contractor_user01
+- Device: WIN10-VM01
+- File: Q2_Report.pdf
+
+###Alert Workflow (automated):
+
+- Triggered a Sentinel analytics rule.
+- Automatically created an incident.
+- Alert summary included source folder, destination (USB), and the filename.
+- Email/Teams notification was sent to SOC team (if SOAR playbook enabled).
+
+### 👁️‍🗨️ Initial Analyst Response (Tier 1/Tier 2)
+
+- Opened alert → Clicked on “Investigate” tab.
+- Saw suspicious activity related to:
+- Unusual file copy pattern
+- Known restricted user (contractor_user01)
+- Usage of external drive
+- Validated data using Advanced Hunting with additional filters:
+
+```kusto
+DeviceFileEvents
+| where InitiatingProcessAccountName == "contractor_user01"
+| where FolderPath has_any ("HR", "Finance", "Confidential")
+| where AdditionalFields contains "RemovableMedia"
+| project Timestamp, FileName, FolderPath, ActionType
+```
+### ✅ Summary
+
+- You had a proactive KQL detection rule already active, which:
+- Checked removable media usage
+- Looked for sensitive filenames
+- Alerted in near real-time
+
+The analyst received the alert automatically in Sentinel, confirming it as insider data exfiltration and escalating the incident as valid.
+
+
 
 ### 🪡 MITRE ATT\&CK Mapping
 
@@ -152,17 +215,7 @@ A contractor on a short-term project accesses files labeled "Internal Use Only" 
 | **TA0009** | [T1560.001 - Archive via Utility](https://attack.mitre.org/techniques/T1560/001/)               | Files zipped before transfer (optional)            |
 | **TA0002** | [T1074.001 - Local Data Staging](https://attack.mitre.org/techniques/T1074/001/)                | Sensitive files staged in `D:\Staging` before copy |
 
----
 
-## 🔍 Alerting Process
-
-1. Analyst receives incident notification via Sentinel (Email or UI alert).
-2. KQL detection fires upon file creation in target directory.
-3. File names & paths reviewed in **DeviceFileEvents** logs.
-4. SOC correlates with user identity & endpoint session history.
-5. Escalation initiated if policy breached.
-
----
 
 ### 🏋️️ SOC Analyst Role Mapping (Daily Operations)
 
@@ -173,19 +226,6 @@ A contractor on a short-term project accesses files labeled "Internal Use Only" 
 | **Investigation**     | Correlated filename, user, and directory              |
 | **Response Workflow** | Documented in `/Playbooks/usb_response_playbook.md`   |
 
----
-
-### 🚒 Incident Response Steps
-
-1. **Detection Triggered** via Sentinel custom rule
-2. **Email/Portal Notification** received by analyst
-3. **Playbook Run**: Triage + ticket generated
-4. **Investigate Device Logs**: Search for matching filenames, users
-5. **Alert Escalation**: Notify HR or Insider Threat Team
-6. **Remediate**: Block USB access, isolate machine
-7. **Document**: IOC report, user behavior, timeline
-
----
 
 ### 🔒 Prevention Governance Policies (Documented)
 
@@ -222,77 +262,6 @@ This project replicates an **enterprise-level insider threat** simulation with:
 
 
 ---
-
-## ✅ Incident Response Flow
-
-- **Step 1**: Incident triaged by Tier 1 (USB detection + suspicious file)
-- **Step 2**: Tier 2 correlates against endpoint timeline and user identity.
-- **Step 3**: Device isolated or user session terminated (if configured).
-- **Step 4**: IOC (filename hash/path) sent to Defender or TI team.
-- **Step 5**: Final review & documentation stored in case manager.
-
----
-
-## 🧪 Sample Log Output
-
-| Timestamp              | DeviceName     | User             | FileName              | FolderPath           | ActionType  |
-|------------------------|----------------|------------------|------------------------|-----------------------|-------------|
-| 2025-06-16 13:01:24    | employee-1257  | employee-1257    | finance_notes.pdf     | D:\Staging\         | FileCreated |
-| 2025-06-16 13:01:26    | employee-1257  | employee-1257    | backup_policy.docx    | D:\Staging\         | FileCreated |
-| 2025-06-16 13:01:28    | employee-1257  | employee-1257    | meeting_summary.pdf   | D:\Staging\         | FileCreated |
-
----
-
-## 📘 README Tips
-
-> “This project showcases how sensitive file actions can be monitored and flagged using Microsoft Defender for Endpoint + Sysmon + Sentinel. Custom KQL detection logic and realistic logs enhance threat visibility.”
-
-
-
-
-### 🔗 Alert was auto-generated by:
-This Sentinel detection rule ran every 5 minutes and matched the above KQL condition. The match occurred once the file Q2_Report.pdf was copied to the USB.
-
-### 🧠 How the Analyst Received the Alert
-
-- Microsoft Sentinel → Incidents pane
-- Alert was visible in the active incidents with severity "High".
-- Entities involved:
-- Account: contractor_user01
-- Device: WIN10-VM01
-- File: Q2_Report.pdf
-
-###Alert Workflow (automated):
-
-- Triggered a Sentinel analytics rule.
-- Automatically created an incident.
-- Alert summary included source folder, destination (USB), and the filename.
-- Email/Teams notification was sent to SOC team (if SOAR playbook enabled).
-
-### 👁️‍🗨️ Initial Analyst Reaction (Tier 1/Tier 2)
-
-- Opened alert → Clicked on “Investigate” tab.
-- Saw suspicious activity related to:
-- Unusual file copy pattern
-- Known restricted user (contractor_user01)
-- Usage of external drive
-- Validated data using Advanced Hunting with additional filters:
-
-```kusto
-DeviceFileEvents
-| where InitiatingProcessAccountName == "contractor_user01"
-| where FolderPath has_any ("HR", "Finance", "Confidential")
-| where AdditionalFields contains "RemovableMedia"
-| project Timestamp, FileName, FolderPath, ActionType
-```
-### ✅ Summary
-
-- You had a proactive KQL detection rule already active, which:
-- Checked removable media usage
-- Looked for sensitive filenames
-- Alerted in near real-time
-
-The analyst received the alert automatically in Sentinel, confirming it as insider data exfiltration and escalating the incident as valid.
 
 ### 🧠 Hypothesis
 
