@@ -244,3 +244,42 @@ This project replicates an **enterprise-level insider threat** simulation with:
 * Playbooks, screenshots, and documentation
 
 > Recruiters see this not as a lab, but as a **practical SOC use case** aligned with actual job expectations for roles like **Insider Threat Analyst** at United Airlines.
+
+
+
+
+
+
+
+
+
+
+## 🧑‍💼 Insider Threat Scenario: USB Data Exfiltration (Contractor)
+<details>
+<summary><strong>Click to expand and view incident timeline</strong></summary>
+
+### 🕵️ Scenario Summary:
+A short-term contractor attempted to exfiltrate sensitive internal documents using a USB storage device. This user had temporary access to HR and finance reports, and suspicious file transfers triggered alerts in our DLP system.
+
+---
+
+### 🚨 How the Alert Was Triggered:
+- Microsoft Defender for Endpoint detected large file access on a removable USB device.
+- Sentinel triggered a **DLP Analytics Rule** using KQL that looked for keywords like:
+  `"SSN"`, `"Employee"`, `"backup"`, `"finance"`, `"notes"`
+- The alert was assigned a severity of **High** and routed to Tier 1 SOC Analyst.
+
+---
+
+### 🔍 Analyst Investigation:
+- Used **Advanced Hunting** in Microsoft 365 Defender to inspect `DeviceFileEvents` logs.
+- Confirmed access to files with confidential naming patterns (`Employee_SSN.docx`, `finance_notes.pdf`).
+- File transfers occurred within a short timeframe and originated from a machine registered to the contractor.
+- **Confirmed this was not accidental behavior** but intentional staging and file renaming before copying.
+
+---
+
+### 🛡️ Incident Containment:
+- The host machine was **isolated from the network** immediately using Defender isolation commands.
+- SOC team blocked
+
