@@ -233,11 +233,10 @@ Check if sensitive file content was renamed with misleading names.
 
 
 ### Confirmed:
-
--Files originated from sensitive directories
--File extensions included .pdf, .docx, .xlsx
--USB device used as destination
--Access occurred outside normal business hours
+- Files originated from sensitive directories
+- File extensions included .pdf, .docx, .xlsx
+- USB device used as destination
+- Access occurred outside normal business hours
 
 ### ⚠️ Root Cause:
 - No Microsoft Purview DLP rules were available in this setup to prevent data transfer to USBs.
@@ -267,18 +266,18 @@ Check if sensitive file content was renamed with misleading names.
 - Escalated alerts automatically for accounts tagged as temporary or contractors
 
 ### ⚙️ SOAR Integration via Sentinel:
--Playbook triggered on detection
--Sent email to SOC
--Created ticket in ServiceNow
--Isolated the host if USB transfer exceeded threshold
+- Playbook triggered on detection
+- Sent email to SOC
+- Created ticket in ServiceNow
+- Isolated the host if USB transfer exceeded threshold
 
 ### ✅ Final Outcome:
 Even in the absence of Purview DLP, this incident proved that Sentinel-based detection and SOC response can mitigate insider threats effectively. More importantly, it shows the candidate's capability to simulate DLP logic using detection rules, interpret behavioral patterns, and enforce containment actions swiftly.
 
 ### Before:
 
--No USB blocking or data classification
--Delayed response due to post-incident detection only
+- No USB blocking or data classification
+- Delayed response due to post-incident detection only
 
 ### After:
 
