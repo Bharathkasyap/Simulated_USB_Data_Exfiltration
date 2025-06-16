@@ -29,7 +29,7 @@ Before diving into the simulated insider threat scenario, it's important to unde
 
 📎 **Click below to view our educational reference file:**
 
-[➡️ Learn More: DLP vs Sentinel Rule Guide](https://github.com/YourRepoName/Email_Security_Simulation_Azure/blob/main/Education/DLP_vs_Sentinel_Reference.md)
+[➡️ For Detailed Understanding: DLP vs Sentinel Rule Guide](src/DLP_Vs_Sentinel.md)
 
 </details>
 
