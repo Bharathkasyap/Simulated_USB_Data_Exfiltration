@@ -59,7 +59,9 @@ A custom detection rule in Microsoft Sentinel analyzes events from Microsoft Def
 ### 🧪 Analyst Investigation:
 Investigated the Sentinel alert using Advanced Hunting queries against DeviceFileEvents
 
-<details> <summary><strong>Click here expand Existing Detection Rule in place and Threat_Hunting Strategy</strong></summary>
+$${{\color{Orange}\normalsize{\textsf{Existing Detection Rule in place and Threat_Hunting Strategy\}}}}$$
+
+<details> <summary><strong>Click here expand</strong></summary>
 
 ## 🔍 Existing Detection Rule: Sentinel KQL-Based USB File Copy Alert
 ### 🎯 Purpose:
