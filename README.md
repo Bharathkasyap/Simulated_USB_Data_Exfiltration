@@ -1,3 +1,47 @@
+## 🧠 Understand DLP vs. Sentinel Detection Rules
+<details>
+<summary><strong>Click here to learn the difference between DLP and Sentinel detection rules</strong></summary>
+
+### 🔍 Why This Section?
+Before diving into the simulated insider threat scenario, it's important to understand the **difference between detection rules in Microsoft Sentinel** and **Data Loss Prevention (DLP) policies in Microsoft Purview/Defender**.
+
+---
+
+### 🧩 Key Differences:
+
+| Feature                        | Microsoft Sentinel Detection Rules                  | Microsoft Purview DLP Rules                             |
+|-------------------------------|------------------------------------------------------|---------------------------------------------------------|
+| **Goal**                      | Detect malicious/suspicious activity via logs       | Prevent sensitive data from leaving organization        |
+| **Based on**                  | KQL queries on ingested logs (Defender, Sysmon, etc.) | Predefined policies, content inspection (e.g., SSNs, PII) |
+| **Trigger Type**              | Reactive alert when a condition is matched          | Proactive: Prevents file sharing/sending if match found |
+| **Use Case**                  | Catch abnormal behavior like USB exfiltration       | Stop SSN/email being sent externally                   |
+| **Tooling**                   | Azure Sentinel + Defender Logs                      | Microsoft Purview + Microsoft Defender for Endpoint     |
+| **Response**                  | Create Incident → Alert → Manual/Playbook           | Quarantine, block, encrypt, notify                      |
+
+---
+
+### 🛠️ What You’ll Learn in the Simulation
+
+- How **Sentinel detection rules** are written using **KQL**
+- How those alerts are used to identify risky behavior
+- How the simulation evolved into **automated prevention using DLP**
+- Full lifecycle from **alert → investigation → automated remediation**
+
+---
+
+📎 **Click below to view our educational reference file:**
+
+[➡️ Learn More: DLP vs Sentinel Rule Guide](https://github.com/YourRepoName/Email_Security_Simulation_Azure/blob/main/Education/DLP_vs_Sentinel_Reference.md)
+
+</details>
+
+
+
+
+
+
+
+
 
 # 🔐 Simulated USB Data Exfiltration using Sysmon + Sentinel
 
