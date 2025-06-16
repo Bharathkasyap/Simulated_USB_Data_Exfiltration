@@ -111,7 +111,7 @@ Even in the absence of Purview DLP, this incident proved that Sentinel-based det
 - Rapid alerting, containment, and root cause triage
 - Demonstrated readiness to transition into real-world DLP environments
 
-###🎯 Key Message:
+### 🎯 Key Message:
 Even without direct access to Microsoft Purview DLP, this scenario proves my strong grasp of DLP principles, incident detection strategy, and SOC response workflows. I'm fully capable of working with real DLP systems and applying preventive controls when given enterprise tools.
 
 
