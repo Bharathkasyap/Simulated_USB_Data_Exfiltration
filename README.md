@@ -59,7 +59,7 @@ A custom detection rule in Microsoft Sentinel analyzes events from Microsoft Def
 ### 🧪 Analyst Investigation:
 Investigated the Sentinel alert using Advanced Hunting queries against DeviceFileEvents
 
-${{\color{blue}\huge{\textsf{Enhanced PowerShell Logging and Monitoring:\ }}}}\$
+${{\color{blue}\huge{\textsf{Existing Detection Rule in place and Threat_Hunting Strategy:\ }}}}\$
 
  $${{\color{Orange}\small{\textsf{Threat Hunt Report: Deep Access:The Adversary\ }}}}\$$
 
