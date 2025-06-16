@@ -82,3 +82,165 @@ DeviceFileEvents
 
 ---
 _Last updated: 2025-06-16 18:12:55_  
+
+
+
+
+
+
+
+
+
+
+
+
+**Project Title: Simulated USB Data Exfiltration Detection using Microsoft Defender for Endpoint and Sentinel**
+
+---
+
+### 🔍 Objective
+
+This project simulates an **insider threat scenario** where a contractor attempts to exfiltrate sensitive files (e.g., SSNs, finance documents) via a USB drive. The goal is to:
+
+* Demonstrate **data loss prevention (DLP)** using Microsoft Defender for Endpoint
+* Detect unauthorized file access and copy activity using **Sysmon logs** and **KQL queries** in Microsoft Sentinel
+* Document governance policies and playbook workflows following **industry standards**
+* Align all steps with the **MITRE ATT\&CK framework**, the **United Airlines Insider Threat JD**, and **SOC triage procedures**
+
+---
+
+### 🏢 Scenario Summary
+
+A contractor on a short-term project accesses files labeled "Internal Use Only" and transfers them to a USB drive. The files contain sensitive financial or personal information.
+
+* Device: Windows 10 VM (Employee-1257)
+* File Types: `.docx`, `.pdf` containing SSNs, budget, payment info
+* Intent: Covert exfiltration for personal gain or sabotage
+
+---
+
+### 🏘️ Architecture & Tools Used
+
+| Component                             | Purpose                                                            |
+| ------------------------------------- | ------------------------------------------------------------------ |
+| Microsoft Defender for Endpoint (MDE) | Device-level monitoring of USB activity and file actions           |
+| Microsoft Sentinel                    | SIEM for correlation, alerting, and response                       |
+| Sysmon + Event Viewer                 | File creation and process activity detection                       |
+| KQL (Kusto Query Language)            | Custom detection logic for USB exfiltration                        |
+| Markdown (.md) Governance Docs        | Policy definition and simulation documentation                     |
+| GitHub                                | Public showcase with `/KQL`, `/Playbooks`, `/Logs`, `/Screenshots` |
+
+---
+
+### 🪡 MITRE ATT\&CK Mapping
+
+| Tactic     | Technique                                                                                       | Description                                        |
+| ---------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| **TA0010** | [T1052.001 - Exfiltration over Removable Media](https://attack.mitre.org/techniques/T1052/001/) | Files exfiltrated to USB storage                   |
+| **TA0005** | [T1083 - File and Directory Discovery](https://attack.mitre.org/techniques/T1083/)              | Lists files before exfiltration                    |
+| **TA0009** | [T1560.001 - Archive via Utility](https://attack.mitre.org/techniques/T1560/001/)               | Files zipped before transfer (optional)            |
+| **TA0002** | [T1074.001 - Local Data Staging](https://attack.mitre.org/techniques/T1074/001/)                | Sensitive files staged in `D:\Staging` before copy |
+
+---
+
+### 🤦️ Step-by-Step Implementation
+
+#### ✅ Step 1: Configure Sysmon with USB & File Monitoring
+
+* Used `sysmonconfig.xml` from SwiftOnSecurity
+* Installed Sysmon on the endpoint:
+
+  ```powershell
+  Sysmon64.exe -accepteula -i sysmonconfig.xml
+  ```
+* Enabled Event ID 11 (FileCreate), Event ID 1 (ProcessCreate), and Event ID 3 (NetworkConnect)
+
+#### ✅ Step 2: Simulate USB File Copy
+
+* Files like `Employee_SSN.docx`, `payment_notes.pdf`, `internal_budget.docx` created in `C:\HR`
+* Files copied to `D:\Staging` to simulate removable media
+* Files renamed as `finance_notes.pdf`, `meeting_summary.pdf`
+
+#### ✅ Step 3: Use Event Viewer to Confirm Sysmon Logs
+
+* Location: `Applications and Services Logs > Microsoft > Windows > Sysmon > Operational`
+* Observed file creation and rename events with metadata
+
+#### ✅ Step 4: Log Ingestion in Sentinel
+
+* Events forwarded to Microsoft Sentinel
+* Table: `DeviceFileEvents`
+* Logs tagged with:
+
+  * DeviceName: employee-1257
+  * ActionType: FileCreated/FileRenamed
+
+#### ✅ Step 5: KQL Detection Logic
+
+```kusto
+DeviceFileEvents
+| where FolderPath startswith "D:\\Staging"
+| where FileName has_any("finance", "summary", "backup", "project")
+| where ActionType == "FileCreated" or ActionType == "FileRenamed"
+| extend User=InitiatingProcessAccountName
+| project Timestamp, DeviceName, User, FileName, FolderPath, ActionType
+| order by Timestamp desc
+```
+
+---
+
+### 🏋️️ SOC Analyst Role Mapping (Daily Operations)
+
+| Task                  | How Covered in Simulation                             |
+| --------------------- | ----------------------------------------------------- |
+| **Alert Triage**      | Triggered based on suspicious filename + path filters |
+| **Threat Hunting**    | Used KQL to proactively query USB and file behavior   |
+| **Investigation**     | Correlated filename, user, and directory              |
+| **Response Workflow** | Documented in `/Playbooks/usb_response_playbook.md`   |
+
+---
+
+### 🚒 Incident Response Steps
+
+1. **Detection Triggered** via Sentinel custom rule
+2. **Email/Portal Notification** received by analyst
+3. **Playbook Run**: Triage + ticket generated
+4. **Investigate Device Logs**: Search for matching filenames, users
+5. **Alert Escalation**: Notify HR or Insider Threat Team
+6. **Remediate**: Block USB access, isolate machine
+7. **Document**: IOC report, user behavior, timeline
+
+---
+
+### 🔒 Prevention Governance Policies (Documented)
+
+* USB access limited to encrypted devices
+* High-risk roles like interns/contractors blocked from removable media
+* Sentinel alert thresholds defined in markdown
+* MITRE coverage validated for audit readiness
+
+---
+
+### 🕊️ Value to Recruiters & Job Relevance
+
+| JD Requirement               | How Project Matches                               |
+| ---------------------------- | ------------------------------------------------- |
+| Daily triage, threat hunting | Proactive queries + alerting + log review         |
+| Governance structure         | Markdown documentation simulating real policies   |
+| MITRE understanding          | Mapped all relevant TTPs to ATT\&CK framework     |
+| Insider threat detection     | End-to-end simulation from intent to detection    |
+| SOC tooling                  | Microsoft Sentinel, Defender for Endpoint, Sysmon |
+
+---
+
+### 🌟 Summary
+
+This project replicates an **enterprise-level insider threat** simulation with:
+
+* Realistic USB exfiltration behavior
+* MDE + Sysmon + Sentinel integration
+* Custom detection logic (KQL)
+* Alert triage and escalation steps
+* Playbooks, screenshots, and documentation
+
+> Recruiters see this not as a lab, but as a **practical SOC use case** aligned with actual job expectations for roles like **Insider Threat Analyst** at United Airlines.
