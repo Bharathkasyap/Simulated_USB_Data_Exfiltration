@@ -1,4 +1,4 @@
-## 🧠 <details><summary><strong>Click here to Understand DLP vs. Sentinel Detection Rules</strong></summary>
+## 🧠<details><summary><strong>Click here to Understand DLP vs. Sentinel Detection Rules</strong></summary>
 
 ### 🔍 Why This Section?
 Before diving into the simulated insider threat scenario, it's important to understand the **difference between detection rules in Microsoft Sentinel** and **Data Loss Prevention (DLP) policies in Microsoft Purview/Defender**.
