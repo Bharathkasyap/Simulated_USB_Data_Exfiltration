@@ -68,7 +68,7 @@ Prevent sending emails with **credit card numbers** to external users via **Exch
 1. **Go to**: [Microsoft Purview portal](https://compliance.microsoft.com/)
 2. **Navigate to** → Data loss prevention → Policies → **Create policy**
 3. **Select Template** → Financial → U.S. Financial Data → Next
-4. **Name your policy** → "Dummy - Block Credit Card External"
+4. **Name your policy** → "Block Credit Card External" (You can choose any)
 5. **Apply to** → Exchange email only
 6. **Choose advanced setup** → Customize advanced DLP rules
 7. **Create Rule**:
