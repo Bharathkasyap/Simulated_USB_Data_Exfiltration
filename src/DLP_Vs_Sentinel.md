@@ -11,7 +11,7 @@ Many showcase only hands-on detection work with tools like **Azure Sentinel**, b
 Even without direct Purview access, I have broken down:
 - The key differences between DLP and Sentinel analytics rules
 - The logic behind both technologies
-- The hands-on process to create a **dummy DLP rule**
+- The hands-on process to create a **DLP rule**
 
 ---
 
@@ -53,7 +53,7 @@ This hands-on foundation is easily transferable to Purview-based DLP enforcement
 
 ---
 
-## 🛠️ Step-by-Step: Creating a Dummy DLP Policy in Microsoft Purview
+## 🛠️ Step-by-Step: Creating a DLP Policy in Microsoft Purview
 
 ### 🎯 Goal:
 Prevent sending emails with **credit card numbers** to external users via **Exchange Online**.
@@ -61,7 +61,7 @@ Prevent sending emails with **credit card numbers** to external users via **Exch
 ### 📌 Prerequisites:
 - Microsoft 365 E5 or Purview license
 - Admin permissions (Compliance or Security Admin)
-- Dummy sensitive data (e.g., "Credit Card Number: 1234-5678-9012-3456")
+- Any sensitive data you want to protect (e.g., "Credit Card Number: 1234-5678-9012-3456")
 
 ### 🪜 Steps:
 
