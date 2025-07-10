@@ -61,6 +61,8 @@ Prevent sending emails with **credit card numbers** to external users via **Exch
 - Microsoft 365 E5 or Purview license
 - Admin permissions (Compliance or Security Admin)
 - Any sensitive data you want to protect (e.g., "Credit Card Number: 1234-5678-9012-3456")
+
+  
 [Great source to learn](https://www.linkedin.com/learning-login/share?forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Fcomplete-guide-to-microsoft-purview%3Ftrk%3Dshare_ent_url%26shareId%3DzQkw56UyQk6hmYIuHNoEBA%253D%253D)
 
 ### 🪜 Steps:
