@@ -137,7 +137,7 @@ DeviceFileEvents
 
 ---
 
-## 🧪 Sample Log Output
+## 🧪 Log Output (Reference)
 
 | Timestamp              | DeviceName     | User             | FileName              | FolderPath           | ActionType  |
 |------------------------|----------------|------------------|------------------------|-----------------------|-------------|
@@ -493,7 +493,7 @@ Simulate the creation and enforcement of a Microsoft Purview Data Loss Preventio
 
 ---
 
-### 📄 Dummy Log Sample
+### 📄 Log Sample (Reference)
 
 | Timestamp           | Username           | DeviceName    | FileName                  | FileType | ActionTaken | PolicyName                           | SensitiveType      |
 | ------------------- | ------------------ | ------------- | ------------------------- | -------- | ----------- | ------------------------------------ | ------------------ |
