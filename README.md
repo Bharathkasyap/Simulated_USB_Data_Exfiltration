@@ -1,3 +1,8 @@
+## ✅ Insider Threat Scenario: USB Data Exfiltration by Contractor
+
+### 🧠 Scenario Summary:
+A short-term contractor (employee-1257) attempted to exfiltrate confidential data such as HR records and financial documents by copying them to a USB drive. Due to limited access, no real-time DLP prevention tools like Microsoft Purview were available. However, the attempt was successfully detected through custom KQL rules in Azure Sentinel, showcasing a strong understanding of detection methodologies and proactive security monitoring.
+
 <details><summary><strong>🧠 Click here to Understand DLP vs. Sentinel Detection Rules</strong></summary>
 
 ### 🔍 Why This Section?
@@ -33,15 +38,6 @@ Before diving into the simulated insider threat scenario, it's important to unde
 
 </details>
 
-
-
-
-
-
-## ✅ Insider Threat Scenario: USB Data Exfiltration by Contractor
-
-### 🧠 Scenario Summary:
-A short-term contractor (employee-1257) attempted to exfiltrate confidential data such as HR records and financial documents by copying them to a USB drive. Due to limited access, no real-time DLP prevention tools like Microsoft Purview were available. However, the attempt was successfully detected through custom KQL rules in Azure Sentinel, showcasing a strong understanding of detection methodologies and proactive security monitoring.
 
 ### 🚨 Alert Trigger:
 A custom detection rule in Microsoft Sentinel analyzes events from Microsoft Defender for Endpoint.
