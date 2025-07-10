@@ -374,7 +374,7 @@ This project replicates an **enterprise-level insider threat** simulation with:
 - Only reactive detection using Azure Sentinel analytics rules
 
 ### ✅ Strategic Enhancements Based on Learnings:
-### 🧠 Simulated Microsoft Purview DLP Understanding Applied:
+### 🧠 Microsoft Purview DLP Understanding Applied:
 - Documented how a real DLP policy would’ve prevented this (USB block, content inspection)
 - Created DLP-style detection rule logic using KQL for educational value
 - Mapped use case to Microsoft Purview's functionality to show readiness for real-world DLP implementation
@@ -400,7 +400,7 @@ Even in the absence of Purview DLP, this incident proved that Sentinel-based det
 
 ### After:
 
-- Simulated DLP logic implemented using custom KQL
+- DLP logic implemented using custom KQL
 - Rapid alerting, containment, and root cause triage
 - Demonstrated readiness to transition into real-world DLP environments
 
@@ -412,7 +412,7 @@ Even without direct access to Microsoft Purview DLP, this scenario proves my str
 <details> <summary><strong>Click here expand</strong></summary>
 
 
-### ✅ Microsoft Purview DLP Policy Simulation
+### ✅ Microsoft Purview DLP Policy
 
 ### 🎯 Goal
 
@@ -470,7 +470,7 @@ Simulate the creation and enforcement of a Microsoft Purview Data Loss Preventio
 
 ---
 
-### 🔔 Simulated DLP Alert Notification
+### 🔔 DLP Alert Notification
 
 <div align="center">
 <img src =src/DLP_Notif.png width="300">
@@ -513,7 +513,7 @@ Simulate the creation and enforcement of a Microsoft Purview Data Loss Preventio
 
 ### 📘 Summary
 
-This simulation demonstrates:
+This Project demonstrates:
 
 * How to create DLP rules in Microsoft Purview
 * What kind of sensitive content gets blocked
