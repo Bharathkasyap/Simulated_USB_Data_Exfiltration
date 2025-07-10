@@ -1,14 +1,13 @@
 # 📘 DLP vs. Azure Sentinel Detection Rules – Deep Dive for Reviewers
 
-> This document serves as a learning and demonstration guide to show my understanding of **Data Loss Prevention (DLP)** and **Azure Sentinel Detection Rules**, despite not having direct enterprise-level access to Microsoft Purview.
+> This document serves as a learning and demonstration guide to show my understanding of **Data Loss Prevention (DLP)** and **Azure Sentinel Detection Rules**, despite not having direct enterprise-level access to Microsoft Purview for the portfolio project.
 
 ---
 
 ## 🧠 Introduction: Why This Document Matters
 
-Many showcase only hands-on detection work with tools like **Azure Sentinel**, but **this file is meant to demonstrate that I understand both detection and prevention strategies.**
+Many showcase only hands-on detection work with tools like **Azure Sentinel**, but **this file is meant to demonstrate to understand both detection and prevention strategies.**
 
-Even without direct Purview access, I have broken down:
 - The key differences between DLP and Sentinel analytics rules
 - The logic behind both technologies
 - The hands-on process to create a **DLP rule**
@@ -42,9 +41,9 @@ While both aim to improve organizational security posture, **they work in differ
 
 ## ✅ Justifying My Current Project Scope
 
-My current project focuses on the **detection phase** using **Azure Sentinel analytics rules** and **Microsoft Defender for Endpoint logs**. With limited access to enterprise DLP tools like Purview, I chose to simulate **insider threat scenarios** and build custom detection logic using **KQL queries** to identify exfiltration attempts.
+My current project focuses on the **detection phase** using **Azure Sentinel analytics rules** and **Microsoft Defender for Endpoint logs**. With limited access to Purview to show them in this project, I chose to simulate **insider threat scenarios** and build custom detection logic using **KQL queries** to identify exfiltration attempts.
 
-Despite not directly using DLP tools, this project prepares me to:
+Despite limited access, this project prepares to:
 - Ingest DLP alerts into Sentinel
 - Correlate DLP violations with broader threat activities
 - Support automation of responses using Sentinel playbooks
@@ -62,6 +61,7 @@ Prevent sending emails with **credit card numbers** to external users via **Exch
 - Microsoft 365 E5 or Purview license
 - Admin permissions (Compliance or Security Admin)
 - Any sensitive data you want to protect (e.g., "Credit Card Number: 1234-5678-9012-3456")
+[Great source to learn](https://www.linkedin.com/learning-login/share?forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Fcomplete-guide-to-microsoft-purview%3Ftrk%3Dshare_ent_url%26shareId%3DzQkw56UyQk6hmYIuHNoEBA%253D%253D)
 
 ### 🪜 Steps:
 
