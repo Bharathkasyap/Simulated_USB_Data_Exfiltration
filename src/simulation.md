@@ -1,3 +1,4 @@
+
 ## 🧪 USB Data Exfiltration Simulation: Technical Procedure Documentation
 
 This file documents each step we followed during the simulation of a USB-based data exfiltration attempt by a short-term contractor. The purpose is to simulate an insider threat scenario, capture behavioral logs using Sysmon, and detect the activity using Microsoft Sentinel.
@@ -129,7 +130,7 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * This simulation mimics a real-world insider threat but is safe and controlled.
 * Screenshots can be added later inside a `/Screenshots` folder.
-* Project can be tied back to MITRE ATT\&CK TTPs such as:
+* Project can be tied back to MITRE ATT&CK TTPs such as:
 
   * T1052.001 (Exfiltration over Removable Media)
   * T1027 (Obfuscated Files or Information)
