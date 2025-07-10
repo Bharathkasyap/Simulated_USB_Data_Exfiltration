@@ -11,7 +11,6 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * **Why**: Ensures identity is linked to endpoint behavior, particularly for temporary users or contractors.
 * **Action**:
-
   * Create a new user (e.g., `employee-1257`) in Entra ID.
   * Assign it to the test VM where simulation will take place.
 
@@ -19,7 +18,6 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * **Why**: MDE enables collection of security events (e.g., file transfers, USB activity) and forwards them to Sentinel.
 * **Action**:
-
   * Download onboarding package from Microsoft 365 Defender portal.
   * Install on the test Windows 10 VM.
   * Confirm device appears in Microsoft 365 Defender portal.
@@ -28,11 +26,9 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * **Why**: Sysmon provides deep telemetry (process creation, file access, USB usage).
 * **Action**:
-
   * Download Sysmon from Sysinternals.
   * Create a config file named `sysmonconfig.xml` (customized to capture file creation and removable drive access).
   * Run in elevated PowerShell:
-
     ```powershell
     cd C:\Downloads
     .\Sysmon64.exe -accepteula -i sysmonconfig.xml
@@ -43,21 +39,18 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * **Why**: To analyze events using KQL inside Microsoft Sentinel.
 * **Action**:
-
   * Use Data Connector: "Windows Security Events via AMA" or "Sysmon via Log Analytics Agent"
   * Confirm ingestion of `DeviceFileEvents`, `SecurityEvent`, and Sysmon events.
 
 ---
 
-### ✅ Phase 2: Data Exfiltration Attempt
+### ✅ Phase 2: Simulate Data Exfiltration Attempt
 
 #### 5. Create Sensitive Directory and Files
 
 * **Why**: Mimics a real insider scenario where sensitive data is accessed and renamed for obfuscation.
 * **Action**:
-
   * Open PowerShell as administrator.
-
     ```powershell
     cd C:\
     mkdir HR
@@ -70,10 +63,8 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * **Why**: This is the core exfiltration step.
 * **Action**:
-
   * Connect USB drive (detected as `D:`).
   * Copy files:
-
     ```powershell
     Copy-Item C:\HR\* D:\Staging\
     ```
@@ -82,9 +73,7 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * **Why**: Attackers often rename files to bypass detection.
 * **Action**:
-
   * Navigate to `D:\Staging`
-
     ```powershell
     Rename-Item "Employee_SSN.docx" "employee_notes.docx"
     Rename-Item "finance_report.pdf" "credit_policy.pdf"
@@ -98,7 +87,6 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * **Why**: Confirm if Sysmon and MDE recorded file access and USB activity.
 * **Action**:
-
   * Open Event Viewer → Applications and Services Logs → Microsoft → Windows → Sysmon → Operational
   * Look for **Event ID 11 (FileCreate)** and **Event ID 23 (FileCopy)**
 
@@ -106,9 +94,7 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * **Why**: Simulate a SOC analyst detecting the exfiltration.
 * **Action**:
-
   * Use Microsoft Sentinel > Logs > Run KQL:
-
     ```kql
     DeviceFileEvents
     | where ActionType == "FileCopied"
@@ -121,7 +107,6 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * **Why**: Helps demonstrate each step visually.
 * **Action**:
-
   * Capture Sysmon logs, Sentinel query results, USB drive content, and folder/file creation steps.
 
 ---
@@ -130,11 +115,6 @@ This file documents each step we followed during the simulation of a USB-based d
 
 * This simulation mimics a real-world insider threat but is safe and controlled.
 * Screenshots can be added later inside a `/Screenshots` folder.
-* Project can be tied back to MITRE ATT&CK TTPs such as:
-
+* Project can be tied back to MITRE ATT\&CK TTPs such as:
   * T1052.001 (Exfiltration over Removable Media)
   * T1027 (Obfuscated Files or Information)
-
----
-
-This file documents everything needed to explain the simulation during interviews, in documentation, or on GitHub.
