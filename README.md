@@ -8,7 +8,7 @@ To solve this, we implemented a simulated DLP policy using Microsoft Purview to 
 <details><summary><strong>🧠 Click here to Understand DLP vs. Sentinel Detection Rules</strong></summary>
 
 ### 🔍 Why This Section?
-Before we dive into the simulated USB data exfiltration case, it's important to highlight why relying only on **detection rules like those in Microsoft Sentinel** isn’t enough. **Detection identifies threats after the damage begins.** This is why we extended this project with a full simulation of Microsoft Purview DLP — a preventive tool that actively stops data loss before it happens.
+Before we dive into the simulated USB data exfiltration case, it's important to highlight why relying only on **detection rules like those in Microsoft Sentinel** isn’t enough. **Detection identifies threats after the damage begins.** This is why we extended this project with a full simulation of Microsoft Purview DLP, a preventive tool that actively stops data loss before it happens.
 
 ---
 
