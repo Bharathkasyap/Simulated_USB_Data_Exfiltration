@@ -39,7 +39,7 @@ Before we dive into the simulated USB data exfiltration case, it's important to 
 
 </details>
 
-**[Data Exfiltration Steps](src/simulation.md)**
+**[Data Exfiltration Steps](src/USB_Data_Exfiltration_Steps.md)**
 
 ---
 
